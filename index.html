@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elite Shareable Notes App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="newnotes.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="app-container">
+      <!-- Sidebar left for organizing my notes-->
+      <aside class="notes-panel">
+        <div class="logo-section">
+          <img src="billion.jpg" alt="Elite Logo" class="logo" />
+          <h1>Elite Notes</h1>
+        </div>
+        <h2>Notes Section</h2>
+        <button id="new-folder-btn" class="btn btn-secondary">
+          <i class="fas fa-folder-plus"></i> New Folder
+        </button>
+        <button id="new-note-btn" class="btn btn-primary">
+          <i class="fas fa-plus"></i> New Note
+        </button>
+        <div id="notes-list" class="notes-list">
+          <!-- our notes will be dynamically created here -->
+        </div>
+      </aside>
+
+      <!-- My hero panel -->
+      <main class="editor-panel">
+        <div class="toolbar">
+          <!-- Text and tools -->
+          <button class="toolbar-btn" data-command="bold" title="Bold">
+            <i class="fas fa-bold"></i>
+          </button>
+          <button class="toolbar-btn" data-command="italic" title="Italic">
+            <i class="fas fa-italic"></i>
+          </button>
+          <button
+            class="toolbar-btn"
+            data-command="underline"
+            title="Underline"
+          >
+            <i class="fas fa-underline"></i>
+          </button>
+          <div class="toolbar-separator"></div>
+          <button
+            class="toolbar-btn"
+            data-command="justifyLeft"
+            title="Align Left"
+          >
+            <i class="fas fa-align-left"></i>
+          </button>
+          <button
+            class="toolbar-btn"
+            data-command="justifyCenter"
+            title="Align Center"
+          >
+            <i class="fas fa-align-center"></i>
+          </button>
+          <button
+            class="toolbar-btn"
+            data-command="justifyRight"
+            title="Align Right"
+          >
+            <i class="fas fa-align-right"></i>
+          </button>
+          <div class="toolbar-separator"></div>
+          <select
+            class="font-size-select"
+            data-command="fontSize"
+            title="Font Size"
+          >
+            <option value="1">Small</option>
+            <option value="3" selected>Normal</option>
+            <option value="5">Large</option>
+            <option value="7">Extra Large</option>
+          </select>
+          <div class="toolbar-separator"></div>
+          <!-- Encryption, Pinning, AI Insights, Sharing, Export, and Dark Mode in this section -->
+          <button id="encrypt-btn" class="toolbar-btn" title="Encrypt/Decrypt">
+            <i class="fas fa-lock"></i>
+          </button>
+          <button id="pin-btn" class="toolbar-btn" title="Pin/Unpin Note">
+            <i class="fas fa-thumbtack"></i>
+          </button>
+          <button id="ai-insights-btn" class="toolbar-btn" title="AI Insights">
+            <i class="fas fa-lightbulb"></i>
+          </button>
+          <button id="share-btn" class="toolbar-btn" title="Share Note">
+            <i class="fas fa-share-alt"></i>
+          </button>
+          <button id="export-btn" class="toolbar-btn" title="Export as PDF">
+            <i class="fas fa-file-export"></i>
+          </button>
+          <div class="toolbar-separator"></div>
+          <button
+            id="dark-mode-toggle"
+            class="toolbar-btn"
+            title="Toggle Dark Mode"
+          >
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+
+        <!-- My Text Editor Area -->
+        <div id="editor" contenteditable="true" class="editor-content">
+          <p>What's cooking in your mind?</p>
+        </div>
+        <button id="save-note-btn" class="btn btn-primary">claim</button>
+      </main>
+
+      <!-- Right side panel -->
+      <aside class="new-section">
+        <div id="status-section">
+          <h2 id="name">Aditi Pathak</h2>
+          <p id="app-description">My notes taking app</p>
+          <button class="button" id="status-button">Online</button>
+        </div>
+
+        <div id="notes-count-section">
+          <h3>Total Notes Created till day</h3>
+          <p id="notes-count">0</p>
+        </div>
+
+        <div id="refer-section">
+          <h3>My Life Motto</h3>
+          <p id="motto"><span>🏆</span> I will become a billionaire <br /></p>
+          <button class="button" id="motto-button">I am the best</button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- AI Insights are available  -->
+    <div id="ai-insights-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>AI Insights</h2>
+        <div id="ai-insights-content"></div>
+      </div>
+    </div>
+
+    <!-- Sharing Modal -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Share this note</p>
+            <input type="text" id="share-link" readonly>
+            <button id="copy-link-btn">Copy Link</button>
+            <button id="email-link-btn">Share via Email</button>
+        </div>
+    </div>
+
+    <!-- Encryption Modal is ready-->
+    <div id="encrypt-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Encrypt Note</h2>
+        <input
+          type="password"
+          id="encryption-password"
+          placeholder="Enter password"
+        />
+        <button id="confirm-encrypt-btn" class="btn btn-primary">
+          Encrypt
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="script.js"></script>
+    <script src="newnotes.js"></script>
+  </body>
+</html>

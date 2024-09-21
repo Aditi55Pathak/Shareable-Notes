@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button {
+    background-color: #e91e63;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#status-section, #eligibility-section, #refer-section {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+body.dark-mode {
+    background-color: #000000;
+    color: #ffd700;
+}
+
+body.dark-mode .button {
+    background-color: #ffd700;
+    color: #000000;
+}
+
+body.dark-mode #status-section,
+body.dark-mode #eligibility-section,
+body.dark-mode #refer-section {
+    background: #333333;
+    color: #ffd700;
+    box-shadow: 0 2px 5px rgba(255, 215, 0, 0.1);
+}
